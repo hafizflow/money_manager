@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:money_manager/views/main_screen.dart';
+import 'package:money_manager/utils/theme/theme.dart';
+import 'package:money_manager/views/home_screen.dart';
 import 'controllers/bindings.dart';
 
 class MyApp extends StatelessWidget {
@@ -11,7 +12,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Personal Budgeting',
       initialBinding: AppBindings(),
-      home: MainScreen(),
+      debugShowCheckedModeBanner: false,
+      home: const HomeScreen(),
+      theme: MoneyManagerAppTheme.lightTheme,
     );
   }
 }

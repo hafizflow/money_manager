@@ -1,30 +1,30 @@
 class Category {
   String id;
   String name;
-  double budget;
-  double spent;
+  double budgetedAmount;
+  double spentAmount;
 
-  Category(
-      {required this.id,
-      required this.name,
-      required this.budget,
-      required this.spent});
+  Category({
+    required this.id,
+    required this.name,
+    required this.budgetedAmount,
+    required this.spentAmount,
+  });
 
-  factory Category.fromFirestore(Map<String, dynamic> data) {
+  factory Category.fromMap(Map<String, dynamic> data, String documentId) {
     return Category(
-      id: data['id'],
-      name: data['name'],
-      budget: data['budget'],
-      spent: data['spent'],
+      id: documentId,
+      name: data['name'] ?? '',
+      budgetedAmount: data['budgetedAmount']?.toDouble() ?? 0.0,
+      spentAmount: data['spentAmount']?.toDouble() ?? 0.0,
     );
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'name': name,
-      'budget': budget,
-      'spent': spent,
+      'budgetedAmount': budgetedAmount,
+      'spentAmount': spentAmount,
     };
   }
 }

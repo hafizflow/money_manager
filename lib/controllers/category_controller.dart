@@ -1,26 +1,36 @@
 import 'package:get/get.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/category.dart';
-import '../services/firestore_service.dart';
 
 class CategoryController extends GetxController {
-  var categories = <Category>[].obs;
-  final FirestoreService _firestoreService = FirestoreService();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final RxList<Category> categories = <Category>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    categories.bindStream(_firestoreService.getCategories());
+    _firestore.collection('categories').snapshots().listen((snapshot) {
+      final categoryList = snapshot.docs
+          .map((doc) => Category.fromMap(doc.data(), doc.id))
+          .toList();
+      categories.assignAll(categoryList);
+    });
   }
 
-  void addCategory(Category category) {
-    _firestoreService.addCategory(category);
+  Future<void> addCategory(Category category) async {
+    final docRef =
+        await _firestore.collection('categories').add(category.toMap());
+    category.id = docRef.id;
   }
 
-  void updateCategory(Category category) {
-    _firestoreService.updateCategory(category);
+  Future<void> updateCategory(Category category) async {
+    await _firestore
+        .collection('categories')
+        .doc(category.id)
+        .update(category.toMap());
   }
 
-  void deleteCategory(String id) {
-    _firestoreService.deleteCategory(id);
+  Future<void> deleteCategory(String id) async {
+    await _firestore.collection('categories').doc(id).delete();
   }
 }
