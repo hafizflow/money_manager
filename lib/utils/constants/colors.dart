@@ -11,7 +11,7 @@ class MColors {
   static const Color textSecondary = Color(0xFF6C757D);
 
   // Background Colors
-  static const Color primaryBackground = Color(0xFFf4f4ea);
+  static const Color primaryBackground = Color(0xFFa3dde5);
 
   // Button Colors
   static const Color buttonPrimary = Color(0xFF15343D);

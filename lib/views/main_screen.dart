@@ -6,7 +6,7 @@ import 'category_item.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
-  final CategoryController _controller = Get.put(CategoryController());
+  final CategoryController _controller = Get.find<CategoryController>();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,14 @@ class MainScreen extends StatelessWidget {
                 () {
                   if (_controller.categories.isEmpty) {
                     return const Center(
-                        child: Text('No categories added yet.'));
+                      child: Text(
+                        'No categories added yet.',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    );
                   }
                   return ListView.separated(
                     itemCount: _controller.categories.length,
