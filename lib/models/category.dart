@@ -11,7 +11,7 @@ class Category {
     required this.spentAmount,
   });
 
-  factory Category.fromMap(Map<String, dynamic> data, String documentId) {
+  factory Category.fromJson(Map<String, dynamic> data, String documentId) {
     return Category(
       id: documentId,
       name: data['name'] ?? '',
@@ -20,7 +20,7 @@ class Category {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'name': name,
       'budgetedAmount': budgetedAmount,

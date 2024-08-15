@@ -6,6 +6,7 @@ import '../models/category.dart';
 
 class AddEditCategoryScreen extends StatelessWidget {
   final CategoryController _controller = Get.find<CategoryController>();
+
   final Category? category;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController budgetController = TextEditingController();
@@ -37,6 +38,7 @@ class AddEditCategoryScreen extends StatelessWidget {
                 decoration: const InputDecoration(hintText: 'Category Name'),
                 validator: (value) =>
                     MValidator.validateEmptyText("Category", value),
+                textInputAction: TextInputAction.next,
               ),
               const SizedBox(height: 16),
               TextFormField(
@@ -45,6 +47,7 @@ class AddEditCategoryScreen extends StatelessWidget {
                 decoration: const InputDecoration(hintText: 'Total Budget'),
                 validator: (value) =>
                     MValidator.validateInvalidAmount("Budget", value),
+                textInputAction: TextInputAction.next,
               ),
               const SizedBox(height: 16),
               TextFormField(
@@ -53,6 +56,7 @@ class AddEditCategoryScreen extends StatelessWidget {
                 decoration: const InputDecoration(hintText: 'Total Spent'),
                 validator: (value) =>
                     MValidator.validateInvalidAmount("Spent", value),
+                textInputAction: TextInputAction.done,
               ),
               const SizedBox(height: 32),
               Row(

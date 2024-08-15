@@ -12,7 +12,7 @@ class CategoryController extends GetxController {
     super.onInit();
     _firestore.collection('categories').snapshots().listen((snapshot) {
       final categoryList = snapshot.docs
-          .map((doc) => Category.fromMap(doc.data(), doc.id))
+          .map((doc) => Category.fromJson(doc.data(), doc.id))
           .toList();
       categories.assignAll(categoryList);
     });
@@ -20,7 +20,7 @@ class CategoryController extends GetxController {
 
   Future<void> addCategory(Category category) async {
     final docRef =
-        await _firestore.collection('categories').add(category.toMap());
+        await _firestore.collection('categories').add(category.toJson());
     category.id = docRef.id;
   }
 
@@ -28,7 +28,7 @@ class CategoryController extends GetxController {
     await _firestore
         .collection('categories')
         .doc(category.id)
-        .update(category.toMap());
+        .update(category.toJson());
   }
 
   Future<void> deleteCategory(String id) async {
