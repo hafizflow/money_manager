@@ -6,6 +6,7 @@ class CategoryController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final RxList<Category> categories = <Category>[].obs;
 
+  /// First time this controller class called this onInit method will run
   @override
   void onInit() {
     super.onInit();
