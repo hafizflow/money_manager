@@ -11,6 +11,8 @@ class Category {
     required this.spentAmount,
   });
 
+  /// factory keyword is used to define a constructor that doesn't necessarily
+  /// create a new instance of the class every time it's called
   factory Category.fromJson(Map<String, dynamic> data, String documentId) {
     return Category(
       id: documentId,
